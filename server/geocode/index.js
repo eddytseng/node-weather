@@ -9,21 +9,20 @@ const getCoordinates = (address) => {
 	return axios
 		.get(`${GEOCODE_API}/json?address=${address}&key=${GEOCODE_API_KEY}`)
 		.then(res => res.data.results[0])
-		.catch(error => error);
+		.catch(error => {
+			throw error;
+		});
 };
 
 router.get('/:address', async (req, res) => {
 	try {
 		const coordinates = await getCoordinates(req.params.address);
+		console.log(JSON.stringify(coordinates, undefined, 4));
 		res.send(coordinates);
 	} catch (error) {
-		console.log(`Error: ${error.response.status} - ${error.response.statusText}`);
-		res
-			.status(error.response.status)
-			.send({ 
-				status: error.response.status,
-				message: error.response.statusText
-			});
+		console.log(error);
+		console.log('There was a problem getting the coordinates.');
+		res.sendStatus(500);
 	}
 });
 
