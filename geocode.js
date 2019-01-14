@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const GEOCODE_API_KEY = 'AIzaSyCe9dDWXKosrdeT2aAaE1n_nVs6JqVO3sE';
+const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const GEOCODE_API = 'https://maps.googleapis.com/maps/api/geocode';
 
 const getCoordinates = (address) => {
