@@ -1,4 +1,4 @@
-#Node Weather Server
+# Node Weather Server
 
 ## Development
 `npm run dev`
