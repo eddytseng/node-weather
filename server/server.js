@@ -1,15 +1,28 @@
+// // Library imports
 require('dotenv').config();
-
 const express = require('express');
+const bodyParser = require('body-parser');
+
+// Why do we need to require this here?
+// The server will not connect to the database without it
+// But it is never called.
+const mongoose = require('./db/mongoose');
+
+// // Local imports
 const forecast = require('./forecast');
 const geocode = require('./geocode');
+const todo = require('./todo');
+const user = require('./user');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8008;
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use('/forecast', forecast);
 app.use('/geocode', geocode);
+app.use('/todos', todo);
+app.use('/users', user);
 
 app.get('/', (req, res) => {
 	res.send('Hello, World!');
@@ -19,7 +32,4 @@ app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports.app = app;
-
-console.log('Type "./mongod --dbpath ~/mongo-data" in the terminal to start the database.');
-console.log('Type "./mongo" in another terminal to start the database server we just started.');
+module.exports = app;

@@ -14,11 +14,11 @@ module.exports.setName = (user, fullName) => {
 module.exports.asyncAdd = (a, b, callback) => {
 	setTimeout(() => {
 		callback(a + b);
-	}, 1000); // Mocha does not want anything longer than 2 seconds
+	}, 100); // Mocha does not want anything longer than 2 seconds
 }
 
 module.exports.asyncSquare = (x, callback) => {
 	setTimeout(() => {
 		callback(x * x);
-	}, 500);
+	}, 100);
 }
