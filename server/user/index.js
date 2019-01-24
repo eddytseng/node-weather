@@ -1,17 +1,18 @@
 const express = require('express');
+const _ = require('lodash');
 
-const { User }= require('./user.model');
+const { User } = require('./user.model');
 
 const router = express.Router();
 
 router.post('/', (req, res) => {
-	const user = new User({ email: req.body.email });
+	const user = new User(_.pick(req.body, ['email', 'password']));
 
 	user
 		.save()
-		.then(doc => res.send(doc))
-		.catch(error => {
-			res.status(400).send(error);
+		.then(user => res.send(user))
+		.catch((error) => {
+			res.sendStatus(400);
 		});
 });
 

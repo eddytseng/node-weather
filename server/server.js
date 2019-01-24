@@ -1,5 +1,7 @@
-// // Library imports
 require('dotenv').config();
+require('./config/config');
+
+// // Library imports
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -14,9 +16,9 @@ const geocode = require('./geocode');
 const todo = require('./todo');
 const user = require('./user');
 
-const PORT = process.env.PORT || 8008;
-
 const app = express();
+
+const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use('/forecast', forecast);
