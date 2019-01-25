@@ -16,9 +16,9 @@ const geocode = require('./geocode');
 const todo = require('./todo');
 const user = require('./user');
 
-const app = express();
-
 const PORT = process.env.PORT;
+
+const app = express();
 
 app.use(bodyParser.json());
 app.use('/forecast', forecast);
