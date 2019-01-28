@@ -52,7 +52,9 @@ UserSchema.methods.generateAuthToken = function() {
 
 	// user.tokens.push({ access, token }) does not work in some versions of mongoose
 	// below is a workaround for most versions
-	user.tokens = user.tokens.concat([{ access, token }]);
+	// user.tokens = user.tokens.concat([{ access, token }]);
+
+	user.tokens.push({ access, token });
 
 	return user.save().then(() => token);
 };
