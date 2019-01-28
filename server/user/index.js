@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const _ = require('lodash');
 
@@ -14,6 +15,21 @@ router.post('/', (req, res) => {
 		.save()
 		.then(() => user.generateAuthToken())
 		.then(token => res.header('x-auth', token).send(user))
+		.catch((error) => {
+			res.sendStatus(400);
+		});
+});
+
+router.post('/login', (req, res) => {
+	const body = _.pick(req.body, ['email', 'password']);
+
+	User
+		.findByCredentials(body.email, body.password)
+		.then((user) => {
+			return user.generateAuthToken().then((token) => {
+				res.header('x-auth', token).send(user);
+			});
+		})
 		.catch((error) => {
 			res.sendStatus(400);
 		});
