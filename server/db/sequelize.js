@@ -1,7 +1,11 @@
 const Sequelize = require('sequelize');
 const colors = require('colors');
 
-const sequelize = new Sequelize('my_practice_db', 'root', 'reavera1', {
+const DB_NAME = process.env.DB_NAME; 
+const DB_USERNAME = process.env.DB_USERNAME || 'root';
+const DB_PASSWORD = process.env.DB_PASSWORD;
+
+const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
 	host: 'localhost',
 	dialect: 'mysql'
 });
