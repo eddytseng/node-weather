@@ -4,11 +4,13 @@ require('./config/config');
 // // Library imports
 const express = require('express');
 const bodyParser = require('body-parser');
+const colors = require('colors');
 
 // Why do we need to require this here?
 // The server will not connect to the database without it
 // But it is never called.
 const mongoose = require('./db/mongoose');
+const sequelize = require('./db/sequelize');
 
 // // Local imports
 const forecast = require('./forecast');
