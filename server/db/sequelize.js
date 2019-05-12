@@ -18,3 +18,53 @@ sequelize
 	.catch((err) => {
 		console.log('Unable to connect to the database: '.red, err.red);
 	});
+
+const Dog = sequelize.define('Dog', {
+	name: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
+	breed: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
+	age: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+	}
+});
+
+Dog
+	.sync({ force: true })
+	.then(() => {
+		return Dog.create({
+			name: 'Matt Damon',
+			breed: 'Labrador Retriever',
+			age: 9
+		});
+	})
+	.then(() => {
+		Dog.create({ 
+			name: 'Roo',
+			breed: 'Great Dane',
+			age: 5
+		})
+		.then((dog) => {
+			console.log(`${dog.name} was created successfully.`.cyan);
+		})
+		.catch((err) => {
+			console.log('There was a problem creating the dog.'.red, err);
+		});
+
+		Dog.create({ 
+			name: 'Maui',
+			breed: 'Beagle',
+			age: 12
+		})
+		.then((dog) => {
+			console.log(`${dog.name} was created successfully.`.cyan);
+		})
+		.catch((err) => {
+			console.log('There was a problem creating the dog.'.red, err);
+		});
+	})
